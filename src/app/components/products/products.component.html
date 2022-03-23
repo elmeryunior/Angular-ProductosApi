@@ -1,0 +1,28 @@
+<button (click)="createNewProduct()" class="btn btn btn-dark btn-sm"><i class="fas fa-plus-circle"></i>Create</button>
+<button (click)="onShowDetail('121212')">detalle not found</button>
+<div class="products--grid">
+  <app-product
+    [product]="product"
+    *ngFor="let product of products"
+    (addedProduct)="onAddToShoppingCart($event)"
+    (showProduct)="onShowDetail($event)"
+  ></app-product>
+  <button (click)="loadMore()" class="btn btn-outline-secondary btn-sm"><i class="fas fa-plus-circle"></i>Load more</button>
+</div>
+<div class="product-detail" [class.active] = "showProductDetail">
+  {{ statusDetail }}
+  <div *ngIf="productChosen">
+    <button (click)="toggelProductDetail()" class="btn btn-outline-primary btn-sm"><i class="far fa-eye"></i>Close</button>
+    <h1>{{ productChosen.title }}</h1>
+    <swiper
+      [slidesPerView]="1"
+    >
+      <ng-template swiperSlide *ngFor="let img of productChosen.images">
+      <img [src]="img" alt="">
+      </ng-template>
+    </swiper>
+    <p>{{productChosen.description}}</p>
+    <button (click)="updateProduct()" class="btn btn-outline-warning btn-sm" style="margin: 10px"><i class="far fa-edit"></i>Edit</button>
+    <button (click)="deleteProduct()" class="btn btn-outline-danger btn-sm"><i class="far fa-trash-alt"></i>Delete</button>
+  </div>
+</div>
