@@ -1,4 +1,3 @@
-<button (click)="createNewProduct()" class="btn btn btn-dark btn-sm"><i class="fas fa-plus-circle"></i>Create</button>
 <div class="products--grid">
   <app-product
     [product]="product"
@@ -6,7 +5,6 @@
     (addedProduct)="onAddToShoppingCart($event)"
     (showProduct)="onShowDetail($event)"
   ></app-product>
-  <button (click)="loadMore()" class="btn btn-outline-secondary btn-sm"><i class="fas fa-plus-circle"></i>Load more</button>
 </div>
 <div class="product-detail" [class.active] = "showProductDetail">
   {{ statusDetail }}
@@ -25,3 +23,5 @@
     <button (click)="deleteProduct()" class="btn btn-outline-danger btn-sm"><i class="far fa-trash-alt"></i>Delete</button>
   </div>
 </div>
+
+

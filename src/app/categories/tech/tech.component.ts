@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-
-import { Product, CreateProductDTO, UpdateProductDTO } from '../../models/product.model';
-
-import { StoreService } from '../../services/store.service';
-import { ProductsService } from '../../services/products.service';
+import { Product, UpdateProductDTO } from 'src/app/models/product.model';
+import { ProductsService } from 'src/app/services/products.service';
+import { StoreService } from 'src/app/services/store.service';
 
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss']
+  selector: 'app-tech',
+  templateUrl: './tech.component.html',
+  styleUrls: ['./tech.component.scss']
 })
-export class ProductsComponent implements OnInit {
+export class TechComponent implements OnInit {
 
   myShoppingCart: Product[] = [];
   total = 0;
@@ -40,7 +38,7 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     //se carga el paginado
-    this.productsService.getProductsByPage(10, 1)
+    this.productsService.getProductsByCat(1)
     .subscribe(data => {
       this.products = data;
       this.offset += this.limit;
@@ -67,20 +65,6 @@ export class ProductsComponent implements OnInit {
       window.alert(errorMsg);
       this.statusDetail = 'error';
     })
-  }
-
-  createNewProduct(){
-    const product: CreateProductDTO ={
-      title: 'Nuevo Producto',
-      description: 'bla bla bla',
-      images: [`https://placeimg.com/640/480/any?random=${Math.random()}`],
-      price: 1000,
-      categoryId: 2,
-    }
-    this.productsService.create(product)
-    .subscribe(data=>{
-      this.products.unshift(data); //esta opcion lo que hace es poner el nuevo producto al principio
-    });
   }
 
   updateProduct(){
@@ -118,3 +102,4 @@ export class ProductsComponent implements OnInit {
   }
 
 }
+

@@ -13,6 +13,10 @@ import { ReversePipe } from './pipes/reverse.pipe';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { HighlightDirective } from './directives/highlight.directive';
 import { SwiperModule } from 'swiper/angular';
+import { PeopleComponent } from './categories/people/people.component';
+import { AnimalComponent } from './categories/animal/animal.component';
+import { NatureComponent } from './categories/nature/nature.component';
+import { TechComponent } from './categories/tech/tech.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,11 @@ import { SwiperModule } from 'swiper/angular';
     NavComponent,
     ReversePipe,
     TimeAgoPipe,
-    HighlightDirective
+    HighlightDirective,
+    PeopleComponent,
+    AnimalComponent,
+    NatureComponent,
+    TechComponent
   ],
   imports: [
     BrowserModule,
