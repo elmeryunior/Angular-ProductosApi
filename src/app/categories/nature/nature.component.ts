@@ -93,7 +93,7 @@ export class NatureComponent implements OnInit {
       const productIndex = this.products.findIndex(item => item.id === this.productChosen.id);
       this.products.splice(productIndex, 1);
       this.showProductDetail = false;
-      this.toastr.success('Producto Eliminado', 'OK', {
+      this.toastr.success('Removed Product', 'OK', {
         timeOut: 3000, positionClass: 'toast-top-center'
       });
     },
