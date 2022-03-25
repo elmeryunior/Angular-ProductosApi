@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row mt-5">
+      <div class="col-md-4 mx-auto">
+          <form (ngSubmit)="onCreate()" novalidate #f="ngForm">
+              <div class="form-group">
+                  <label for="title">Title</label>
+                  <input type="text" class="form-control" id="title" name="title"
+                  [(ngModel)]="title" required>
+              </div>
+              <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" id="description" name="description"
+                [(ngModel)]="description" required>
+              </div>
+              <div class="form-group">
+                  <label for="price">Precio</label>
+                  <input type="number" class="form-control" id="price" name="price"
+                  [(ngModel)]="price" required>
+              </div>
+              <button class="btn btn-outline-success btn-block" [disabled]="!f.valid"><i class="fas fa-plus-circle"></i>Crear</button>
+              <button class="btn btn-outline-primary btn-block" routerLink=""><i class="fas fa-arrow-alt-circle-left"></i>Volver</button>
+          </form>
+      </div>
+  </div>
+</div>

@@ -1,4 +1,3 @@
-<button (click)="createNewProduct()" class="btn btn btn-dark btn-sm"><i class="fas fa-plus-circle"></i>Create</button>
 <div class="products--grid">
   <app-product
     [product]="product"
@@ -6,10 +5,9 @@
     (addedProduct)="onAddToShoppingCart($event)"
     (showProduct)="onShowDetail($event)"
   ></app-product>
-  <button (click)="loadMore()" class="btn btn-outline-secondary btn-sm"><i class="fas fa-plus-circle"></i>Load more</button>
 </div>
+<button (click)="loadMore()" class="btn btn btn-outline-secondary btn-sm"><i class="far fa-eye"></i>Load More</button>
 <div class="product-detail" [class.active] = "showProductDetail">
-  {{ statusDetail }}
   <div *ngIf="productChosen">
     <button (click)="toggelProductDetail()" class="btn btn-outline-primary btn-sm"><i class="far fa-eye"></i>Close</button>
     <h1>{{ productChosen.title }}</h1>

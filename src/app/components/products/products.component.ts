@@ -4,6 +4,7 @@ import { Product, CreateProductDTO, UpdateProductDTO } from '../../models/produc
 
 import { StoreService } from '../../services/store.service';
 import { ProductsService } from '../../services/products.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-products',
@@ -29,11 +30,11 @@ export class ProductsComponent implements OnInit {
   };
   limit = 10;
   offset = 0;
-  statusDetail: 'loading' | 'success' | 'error' | 'init' = 'init';
 
   constructor(
     private storeService: StoreService,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private toastr: ToastrService,
   ) {
     this.myShoppingCart = this.storeService.getShoppingCart();
   }
@@ -57,29 +58,17 @@ export class ProductsComponent implements OnInit {
   }
 
   onShowDetail(id: string) {
-    this.statusDetail = 'loading';
     this.toggelProductDetail();
     this.productsService.getProduct(id)
     .subscribe(data => {
       this.productChosen = data;
-      this.statusDetail = 'success';
-    }, errorMsg => {
-      window.alert(errorMsg);
-      this.statusDetail = 'error';
-    })
-  }
-
-  createNewProduct(){
-    const product: CreateProductDTO ={
-      title: 'Nuevo Producto',
-      description: 'bla bla bla',
-      images: [`https://placeimg.com/640/480/any?random=${Math.random()}`],
-      price: 1000,
-      categoryId: 2,
-    }
-    this.productsService.create(product)
-    .subscribe(data=>{
-      this.products.unshift(data); //esta opcion lo que hace es poner el nuevo producto al principio
+      this.toastr.success('Detail loaded', 'OK', {
+        timeOut: 3000, positionClass: 'toast-top-center'
+      });
+    },err => {
+      this.toastr.error('Error', 'Error', {
+        timeOut: 3000,  positionClass: 'toast-top-center',
+      });
     });
   }
 
@@ -102,11 +91,20 @@ export class ProductsComponent implements OnInit {
   deleteProduct() {
     const id = this.productChosen.id;
     this.productsService.delete(id)
-    .subscribe(() => {
+    .subscribe(data => {
       const productIndex = this.products.findIndex(item => item.id === this.productChosen.id);
       this.products.splice(productIndex, 1);
       this.showProductDetail = false;
-    });
+      this.toastr.success('Producto Eliminado', 'OK', {
+        timeOut: 3000, positionClass: 'toast-top-center'
+      });
+    },
+    err => {
+      this.toastr.error(err.error.mensaje, 'Error', {
+        timeOut: 3000,  positionClass: 'toast-top-center',
+      });
+      }
+    );
   }
 
   loadMore() {

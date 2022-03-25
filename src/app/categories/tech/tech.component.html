@@ -6,8 +6,8 @@
     (showProduct)="onShowDetail($event)"
   ></app-product>
 </div>
+<button (click)="loadMore()" class="btn btn btn-outline-secondary btn-sm"><i class="far fa-eye"></i>Load More</button>
 <div class="product-detail" [class.active] = "showProductDetail">
-  {{ statusDetail }}
   <div *ngIf="productChosen">
     <button (click)="toggelProductDetail()" class="btn btn-outline-primary btn-sm"><i class="far fa-eye"></i>Close</button>
     <h1>{{ productChosen.title }}</h1>
@@ -23,5 +23,3 @@
     <button (click)="deleteProduct()" class="btn btn-outline-danger btn-sm"><i class="far fa-trash-alt"></i>Delete</button>
   </div>
 </div>
-
-

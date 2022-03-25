@@ -38,8 +38,8 @@ export class ProductsService {
     return this.http.get<Product[]>(this.apiUrl + "listarProduct/" + limit + "/" + offset)
   }
 
-  getProductsByCat(categoryId: number) {
-    return this.http.get<Product[]>(this.apiUrl + "listarProductCat/" + categoryId)
+  getProductsByCat(categoryId: number,limit: number, offset: number) {
+    return this.http.get<Product[]>(this.apiUrl + "listarProductCat/" + categoryId + "/" + limit + "/" + offset)
   }
 
   create(dto:CreateProductDTO){

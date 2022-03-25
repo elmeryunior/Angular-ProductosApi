@@ -17,6 +17,11 @@ import { PeopleComponent } from './categories/people/people.component';
 import { AnimalComponent } from './categories/animal/animal.component';
 import { NatureComponent } from './categories/nature/nature.component';
 import { TechComponent } from './categories/tech/tech.component';
+import { EditarComponent } from './operaciones/editar/editar.component';
+import { NuevoComponent } from './operaciones/nuevo/nuevo.component';
+// external librerias para animacion
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -31,14 +36,18 @@ import { TechComponent } from './categories/tech/tech.component';
     PeopleComponent,
     AnimalComponent,
     NatureComponent,
-    TechComponent
+    TechComponent,
+    NuevoComponent,
+    EditarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    SwiperModule
+    SwiperModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

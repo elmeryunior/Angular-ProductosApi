@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Product, UpdateProductDTO } from 'src/app/models/product.model';
 import { ProductsService } from 'src/app/services/products.service';
 import { StoreService } from 'src/app/services/store.service';
@@ -26,18 +27,19 @@ export class NatureComponent implements OnInit {
   };
   limit = 10;
   offset = 0;
-  statusDetail: 'loading' | 'success' | 'error' | 'init' = 'init';
+  cat = 4;
 
   constructor(
     private storeService: StoreService,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private toastr: ToastrService
   ) {
     this.myShoppingCart = this.storeService.getShoppingCart();
   }
 
   ngOnInit(): void {
     //se carga el paginado
-    this.productsService.getProductsByCat(4)
+    this.productsService.getProductsByCat(this.cat,this.limit,this.offset)
     .subscribe(data => {
       this.products = data;
       this.offset += this.limit;
@@ -54,16 +56,18 @@ export class NatureComponent implements OnInit {
   }
 
   onShowDetail(id: string) {
-    this.statusDetail = 'loading';
     this.toggelProductDetail();
     this.productsService.getProduct(id)
     .subscribe(data => {
       this.productChosen = data;
-      this.statusDetail = 'success';
-    }, errorMsg => {
-      window.alert(errorMsg);
-      this.statusDetail = 'error';
-    })
+      this.toastr.success('Detail loaded', 'OK', {
+        timeOut: 3000, positionClass: 'toast-top-center'
+      });
+    },err => {
+      this.toastr.error('Error', 'Error', {
+        timeOut: 3000,  positionClass: 'toast-top-center',
+      });
+    });
   }
 
   updateProduct(){
@@ -85,15 +89,24 @@ export class NatureComponent implements OnInit {
   deleteProduct() {
     const id = this.productChosen.id;
     this.productsService.delete(id)
-    .subscribe(() => {
+    .subscribe(data => {
       const productIndex = this.products.findIndex(item => item.id === this.productChosen.id);
       this.products.splice(productIndex, 1);
       this.showProductDetail = false;
-    });
+      this.toastr.success('Producto Eliminado', 'OK', {
+        timeOut: 3000, positionClass: 'toast-top-center'
+      });
+    },
+    err => {
+      this.toastr.error(err.error.mensaje, 'Error', {
+        timeOut: 3000,  positionClass: 'toast-top-center',
+      });
+      }
+    );
   }
 
   loadMore() {
-    this.productsService.getProductsByPage(this.limit, this.offset)
+    this.productsService.getProductsByCat(this.cat,this.limit,this.offset)
     .subscribe(data => {
       this.products = this.products.concat(data);
       this.offset += this.limit;
