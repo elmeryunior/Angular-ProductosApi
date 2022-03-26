@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'nature', component: NatureComponent},
   { path: 'animal', component: AnimalComponent},
   { path: 'tech', component: TechComponent},
-  { path: 'edit', component: EditarComponent},
+  { path: 'edit/:id', component: EditarComponent},
   { path: 'nuevo', component: NuevoComponent},
 ];
 

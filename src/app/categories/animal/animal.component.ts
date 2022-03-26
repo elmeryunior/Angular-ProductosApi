@@ -71,22 +71,6 @@ export class AnimalComponent implements OnInit {
     });
   }
 
-  updateProduct(){
-    const changes: UpdateProductDTO = {
-      title: 'Nuevo title',
-      description: 'Esta es un prueba',
-    }
-    const id = this.productChosen.id;
-    this.productsService.update(id,changes)
-    .subscribe(data =>{
-      console.log('updates',data);
-      const productIndex = this.products.findIndex(item => item.id === this.productChosen.id);
-      this.products[productIndex] = data;
-      this.productChosen = data;
-      this.toggelProductDetail();
-    });
-  }
-
   deleteProduct() {
     const id = this.productChosen.id;
     this.productsService.delete(id)

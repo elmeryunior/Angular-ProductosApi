@@ -19,7 +19,7 @@
       </ng-template>
     </swiper>
     <p>{{productChosen.description}}</p>
-    <button (click)="updateProduct()" class="btn btn-outline-warning btn-sm" style="margin: 10px"><i class="far fa-edit"></i>Edit</button>
+    <button class="btn btn-outline-warning btn-sm" style="margin: 10px" routerLink="/edit/{{productChosen.id}}"><i class="far fa-edit"></i>Edit</button>
     <button (click)="deleteProduct()" class="btn btn-outline-danger btn-sm"><i class="far fa-trash-alt"></i>Delete</button>
   </div>
 </div>
