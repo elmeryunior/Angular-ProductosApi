@@ -18,6 +18,14 @@ export class NuevoComponent implements OnInit {
   price = 0;
   categoryId = 2;
 
+  categories = [
+    {valor:1, muestraValor:'Tech'},
+    {valor:2, muestraValor:'Animal'},
+    {valor:3, muestraValor:'People'},
+    {valor:4, muestraValor:'Nature'}
+  ];
+
+  seleccionada: number = this.categories[0].valor;
 
   constructor(
     private toastr: ToastrService,
@@ -37,7 +45,7 @@ export class NuevoComponent implements OnInit {
         `https://placeimg.com/640/480/any?random=${Math.random()}`,
         `https://placeimg.com/640/480/any?random=${Math.random()}`],
       price: this.price,
-      categoryId: 2,
+      categoryId: this.seleccionada,
     }
     this.productsService.create(product)
     .subscribe(
